@@ -140,8 +140,15 @@ def luyen_kim(lich_xep):
         )
 
         # Kiểm tra ràng buộc
-        if khong_bac_si_khong_lam_nhieu_phong(
-            lich_xep_hien_tai, bac_si1, phong1, ngay1
+        if (
+            khong_bac_si_khong_lam_nhieu_phong(
+                lich_xep_hien_tai, bac_si1, phong1, ngay1
+            )
+            == False
+            or khong_bac_si_khong_lam_nhieu_phong(
+                lich_xep_hien_tai, bac_si2, phong2, ngay2
+            )
+            == False
         ):
             # Hoán đổi bác sĩ trong hai ô
             lich_xep_hien_tai[phong1][ngay1], lich_xep_hien_tai[phong2][ngay2] = (
@@ -155,6 +162,7 @@ def luyen_kim(lich_xep):
             delta_nang_luong = nang_luong_moi - nang_luong_hien_tai
 
             # Chấp nhận hoặc từ chối hoán đổi dựa trên xác suất
+
             if delta_nang_luong < 0 or random.random() < math.exp(
                 -delta_nang_luong / 0.1
             ):
